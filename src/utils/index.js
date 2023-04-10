@@ -5,7 +5,7 @@ const arrToStr = (arr) => {
 }
 
 const sortCards = (sortValue, countries) => {
-    if(sortValue === null) {console.log('hello'); return countries};
+    if(sortValue === null) {return countries};
     let [type, isAsc] = sortValue.split('-');
     isAsc = isAsc === 'ASC';
     if(type === 'Population') {
