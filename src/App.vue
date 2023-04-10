@@ -1,16 +1,14 @@
 <script setup>
-import HelloWorld from './components/HomePage.vue'
-import DetailPage from './components/DetailPage.vue';
 import Nav from './components/Nav.vue';
+import { useStore } from 'vuex';
+import { computed } from '@vue/reactivity';
+const store = useStore();
+const isThemeDark =  computed(() => store.state.isThemeDark)
 </script>
 
 <template>
-  <v-app class="bg-grey-lighten-5 pt-12 mt-12">
+  <v-app :class="{'bg-blue-grey-darken-4': isThemeDark, 'bg-grey-lighten-5': !isThemeDark}">
     <Nav />
-    <HelloWorld />
-    <!-- <DetailPage /> -->
+    <router-view :key="$route.fullPath"/>
   </v-app>
 </template>
-
-<style scoped>
-</style>

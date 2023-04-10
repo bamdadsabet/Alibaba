@@ -1,45 +1,51 @@
 <script setup>
+  import { computed } from '@vue/reactivity';
+  import { useStore } from 'vuex';
+  import CountryInfoLine from './CountryInfoLine.vue';
+
+  defineProps({
+    name: String,
+    flag: String,
+    imgAlt: String,
+    detail: Object,
+  });
+
+  const store = useStore();
+  const isThemeDark = computed(() => store.state.isThemeDark)
+  
 </script>
 
 <template>
     <v-card
-      :loading="loading"
-      class="mx-auto my-12 rounded-lg curser-poine"
+      class="mx-auto my-12 rounded-lg"
+      :class="{'bg-blue-grey-darken-3': isThemeDark}"
       width="335"
+      @click="this.$router.push(`/country/${name}`)"
+
     >
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear
-          :active="isActive"
-          color="deep-purple"
-          height="4"
-          indeterminate
-        ></v-progress-linear>
-      </template>
       <v-img
         cover
-        height="190"
+        height="200"
         aspect-ratio="4/3"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+        :src="flag"
+        :lazy-src="flag"
       />
       <v-card-item class="pt-3 pl-6 pb-8">
+
+        <!-- name -->
         <v-card-title class="mb-2">
-            <h3>Germany</h3>
+            <h4>{{ name }}</h4>
         </v-card-title>
-            <span></span>
+
+        <!-- details -->
         <section>
-            <span class="d-block text-subtitle-1 text-grey-darken-2">
-                <span class="font-weight-bold text-black">Population: </span>81,770,900
-            </span>
-            <span class="d-block text-subtitle-1 text-grey-darken-2">
-                <span class="font-weight-bold text-black">Region: </span>Europe
-            </span>
-            <span class="d-block text-subtitle-1 text-grey-darken-2">
-                <span class="font-weight-bold text-black">Capital: </span>Berlin
-            </span>
+          <CountryInfoLine
+            v-for="(value, key, index) in detail"
+            :key="index" 
+            :keyTitle="key"
+            :value="value"
+          />
         </section>
       </v-card-item>
     </v-card>
   </template>
-
-<style>
-</style>
