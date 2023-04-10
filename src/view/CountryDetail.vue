@@ -42,7 +42,7 @@
                     height="45px" 
                     class="px-8 font-weight-bold"
                     :class="{'bg-blue-grey-darken-3': isThemeDark}"
-                    @click="this.$router.push('/')"
+                    @click="()=>{let self = this; self.$router.push('/') }"
                 >
                     <v-icon
                         size="large"
@@ -95,8 +95,9 @@
                                 min-width="120" 
                                 class="mr-2 my-2"
                                 :class="{'bg-blue-grey-darken-3': isThemeDark}" 
-                                @click="this.$router.push(`/country/${country}`)"
+                                @click="()=>{let self = this; self.$router.push(`/country/${country}`)}"
                             >
+
                                 {{ country }}
                             </v-btn>
                         </div>

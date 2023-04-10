@@ -20,7 +20,7 @@
       class="mx-auto my-12 rounded-lg"
       :class="{'bg-blue-grey-darken-3': isThemeDark}"
       width="335"
-      @click="this.$router.push(`/country/${name}`)"
+      @click="()=>{let self = this; self.$router.push(`/country/${name}`)}"
 
     >
       <v-img
