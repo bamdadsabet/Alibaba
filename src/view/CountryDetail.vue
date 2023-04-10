@@ -6,7 +6,11 @@
     import { useStore } from 'vuex';
     import { useRoute } from 'vue-router';
 
-    const router = useRoute()
+    import { useRouter } from 'vue-router';
+
+    const router = useRouter()
+
+    const route = useRoute()
 
     const countryData = ref([]);
     const isLoading = ref(true)
@@ -14,7 +18,7 @@
     const store = useStore();
     const isThemeDark = computed(() => store.state.isThemeDark)
 
-    const countryName = router.params.name;
+    const countryName = route.params.name;
 
     onBeforeMount(() => {
         getCountryData(countryName).then(res => {
@@ -42,7 +46,7 @@
                     height="45px" 
                     class="px-8 font-weight-bold"
                     :class="{'bg-blue-grey-darken-3': isThemeDark}"
-                    @click="()=>{let self = this; self.$router.push('/') }"
+                    @click="()=>{router.push('/') }"
                 >
                     <v-icon
                         size="large"
@@ -95,7 +99,7 @@
                                 min-width="120" 
                                 class="mr-2 my-2"
                                 :class="{'bg-blue-grey-darken-3': isThemeDark}" 
-                                @click="()=>{let self = this; self.$router.push(`/country/${country}`)}"
+                                @click="()=>{router.push(`/country/${country}`)}"
                             >
 
                                 {{ country }}

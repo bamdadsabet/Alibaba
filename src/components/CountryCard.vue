@@ -2,6 +2,10 @@
   import { computed } from '@vue/reactivity';
   import { useStore } from 'vuex';
   import CountryInfoLine from './CountryInfoLine.vue';
+  
+  import { useRouter } from 'vue-router';
+
+    const router = useRouter()
 
   defineProps({
     name: String,
@@ -20,7 +24,7 @@
       class="mx-auto my-12 rounded-lg"
       :class="{'bg-blue-grey-darken-3': isThemeDark}"
       width="335"
-      @click="()=>{let self = this; self.$router.push(`/country/${name}`)}"
+      @click="()=>{router.push(`/country/${name}`)}"
 
     >
       <v-img
